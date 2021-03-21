@@ -41,7 +41,7 @@ const College = ({match}) => {
         <b>Year Founded:</b> {college.yearFounded}
         </ListGroup.Item>
         <ListGroup.Item>
-        <b>Address:</b> {res[id].city}, {college.state}, {res[id].country}
+        <b>Address:</b> {college.city}, {college.state}, {college.country}
         </ListGroup.Item>
         <ListGroup.Item>
         <b>number Of Students:</b> {college.numStudednst}
