@@ -15,7 +15,8 @@ import {
 
 const College = ({match}) => {
 
-    const [college, setCollege] = useState({});
+    const [college, setCollege] = useState(null);
+    const [colleges, setColleges] = useState(null);
     useEffect(() => {
         if(!college){
 
@@ -24,35 +25,38 @@ const College = ({match}) => {
     })
 
     const getCollege = async (id) => {
-        let res = await collegeService.getOne(id);
-	      setCollege(res);
-    }
-    return (
-        <div><Card>{(college != null)?(<Card.Header><Card.Title>{
-            college.name
-          }</Card.Title></Card.Header>
-          <Card.body>
-            <ListGroup>
-            <ListGroup.Item>
-            <b>Year Founded:</b> {college.yearFounded}
-            </ListGroup.Item>
-            <ListGroup.Item>
-            <b>Address:</b> {college.city}, {college.state}, {college.country}
-            </ListGroup.Item>
-            <ListGroup.Item>
-            <b>Courses Offered:</b> {college.yearFounded}
-            </ListGroup.Item>
-            <ListGroup.Item>
-            <b>Courses Offered:</b> {college.courses.forEach(c => {<span margin="10px">c</span>})}
-            </ListGroup.Item>
-            </ListGroup>
-          
-          </Card.body>):(<></>)
+        let res = await collegeService.getAll();
+	      setColleges(res);
+        setCollege(res[id]);
+        console.log(res)
 
-        }
-          </Card>}
-        </div>
-    );
+    }
+
+    return ( <div><Card><Card.Header><Card.Title>{
+        college.name
+      }</Card.Title></Card.Header>
+      <Card.Body>
+        <ListGroup>
+        <ListGroup.Item>
+        <b>Year Founded:</b> {college.yearFounded}
+        </ListGroup.Item>
+        <ListGroup.Item>
+        <b>Address:</b> {res[id].city}, {college.state}, {res[id].country}
+        </ListGroup.Item>
+        <ListGroup.Item>
+        <b>number Of Students:</b> {college.numStudednst}
+        </ListGroup.Item>
+        <ListGroup.Item>
+        <b>Courses Offered:</b> {college.courses.forEach(c => {<span margin="10px">c</span>})}
+        </ListGroup.Item>
+        </ListGroup>
+
+      </Card.Body>
+
+
+      </Card>
+    </div>
+  );
 }
 
 export default College
