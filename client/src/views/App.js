@@ -38,6 +38,7 @@ function App() {
   const getColleges = async () => {
     let res = await collegeService.getAll();
     setColleges(res);
+    localStorage.setItem("colleges", JSON.stringify(res));
     getPieData(res);
 
   }
@@ -97,7 +98,7 @@ function App() {
   }
   ];
 const renderProduct = (product) => {
-console.log(product)
+
   return(
     <Link to={'/college/' + product.id} key={product.id}>
     <ListGroup.Item>
